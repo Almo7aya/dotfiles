@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<root>
+    <item>
+        <name>Stephen Custom Keyboard mappings</name>
+        <appendix></appendix>
+
+        <item>
+            <name>SimultaneousKeyPresses</name>
+            <item>
+                <name>J and K to escape</name>
+                <appendix>(J+K to Escape)</appendix>
+                <identifier>private.j_k_to_escape</identifier>
+                <autogen>__SimultaneousKeyPresses__ KeyCode::J, KeyCode::K, KeyCode::ESCAPE</autogen>
+            </item>
+        </item>
+    </item>
+</root>

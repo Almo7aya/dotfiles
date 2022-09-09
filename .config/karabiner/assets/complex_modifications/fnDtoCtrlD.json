@@ -1,0 +1,29 @@
+{
+  "title": "fn+d to ctrl+d",
+  "rules": [
+    {
+      "description": "fn+d to ctrl+d",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "d",
+              "modifiers": [
+                  "left_control"
+                ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

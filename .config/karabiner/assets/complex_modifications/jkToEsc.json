@@ -1,0 +1,39 @@
+{
+  "title": "JK for escape",
+  "rules": [
+    {
+      "description": "JK for escape v10",
+      "manipulators": [
+        {
+          "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 200
+          },
+          "from": {
+            "simultaneous": [
+              {
+                "key_code": "j"
+              },
+              {
+                "key_code": "k"
+              }
+            ],
+            "simultaneous_options": {
+              "key_down_order": "strict"
+            },
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

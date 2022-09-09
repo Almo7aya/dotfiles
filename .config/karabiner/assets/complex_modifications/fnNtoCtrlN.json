@@ -1,0 +1,29 @@
+{
+  "title": "fn+n to ctrl+n",
+  "rules": [
+    {
+      "description": "fn+n to ctrl+n",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "mandatory": [
+                "fn"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "n",
+              "modifiers": [
+                  "left_control"
+                ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
