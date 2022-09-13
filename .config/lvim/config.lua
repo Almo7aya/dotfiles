@@ -7,10 +7,6 @@ vim.opt.relativenumber = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
--- quick fix for depricated indicator_icon
-lvim.builtin.bufferline.options.indicator_icon = nil
-lvim.builtin.bufferline.options.indicator = { style = "icon", icon = "▎" }
-
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -198,6 +194,21 @@ lvim.plugins = {
         },
         -- all the sub-options of filetypes apply to buftypes
         buftypes = {},
+      }
+    end
+  },
+  {
+    "samodostal/image.nvim",
+    config = function()
+      require('image').setup {
+        render = {
+          min_padding = 5,
+          show_label = true,
+          use_dither = true,
+        },
+        events = {
+          update_on_nvim_resize = true,
+        },
       }
     end
   }

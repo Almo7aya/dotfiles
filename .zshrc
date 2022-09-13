@@ -18,6 +18,8 @@ miniplug plugin jeffreytse/zsh-vi-mode
 miniplug plugin zsh-users/zsh-completions
 miniplug plugin zsh-users/zsh-autosuggestions
 miniplug plugin agkozak/zsh-z
+miniplug plugin wfxr/forgit
+miniplug plugin Bhupesh-V/ugit
 # Theme
 miniplug theme spaceship-prompt/spaceship-prompt
 
