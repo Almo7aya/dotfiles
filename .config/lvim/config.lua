@@ -1,11 +1,13 @@
 -- general
-lvim.log.level = "warn"
-lvim.format_on_save = false
-lvim.colorscheme = "neogruvbox"
-vim.opt.cmdheight = 1
+lvim.log.level         = "warn"
+lvim.format_on_save    = false
+lvim.colorscheme       = "neogruvbox"
+vim.opt.cmdheight      = 1
 vim.opt.relativenumber = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.fillchars      = "fold: "
+vim.opt.foldlevel      = 99
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -102,8 +104,6 @@ lvim.plugins = {
     branch = 'v2', -- optional but strongly recommended
     event = "BufRead",
     config = function()
-      vim.api.nvim_command("autocmd BufReadPost,FileReadPost * normal zR")
-
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
       vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", { silent = true })
       vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })

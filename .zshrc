@@ -1,7 +1,10 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=5000
+SAVEHIST=5000
+setopt appendhistory
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 setopt autocd extendedglob
 # End of lines configured by zsh-newuser-install
 
@@ -123,7 +126,7 @@ SPACESHIP_PROMPT_ORDER=(
   exec_time     # Execution time
   line_sep      # Line break
   battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
+  # vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character

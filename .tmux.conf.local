@@ -33,7 +33,7 @@ tmux_conf_new_pane_retain_current_path=true
 #   - true
 #   - false (default)
 #   - disabled (do not modify split-window bindings)
-tmux_conf_new_pane_reconnect_ssh=false
+tmux_conf_new_pane_reconnect_ssh=true
 
 # prompt for session name when creating a new session, possible values are:
 #   - true
@@ -371,6 +371,19 @@ bind h select-pane -L  # move left
 bind j select-pane -D  # move down
 bind k select-pane -U  # move up
 bind l select-pane -R  # move right
+
+unbind _
+unbind -
+# split current window horizontally
+bind _ split-window -v
+# split current window vertically
+bind - split-window -h
+
+unbind x
+bind x killp
+
+unbind q
+bind q confirm kill-window
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
