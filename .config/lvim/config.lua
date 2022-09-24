@@ -9,7 +9,7 @@ vim.opt.foldexpr       = "nvim_treesitter#foldexpr()"
 vim.opt.fillchars      = "fold: "
 vim.opt.foldlevel      = 99
 
-vim.opt.guifont = { "FiraCode Nerd Font Mono", "h12" }
+vim.opt.guifont = { "Fisa Code", "h12" }
 
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -172,63 +172,6 @@ lvim.plugins = {
       vim.api.nvim_command("augroup END")
     end
   },
-  { "ziontee113/color-picker.nvim",
-    config = function()
-      local opts = { noremap = true, silent = true }
-
-      vim.keymap.set("n", "<C-c>", "<cmd>PickColor<cr>", opts)
-      vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<cr>", opts)
-
-      -- vim.keymap.set("n", "your_keymap", "<cmd>ConvertHEXandRGB<cr>", opts)
-      -- vim.keymap.set("n", "your_keymap", "<cmd>ConvertHEXandHSL<cr>", opts)
-
-      require("color-picker").setup({ -- for changing icons & mappings
-        -- ["icons"] = { "ﱢ", "" },
-        -- ["icons"] = { "ﮊ", "" },
-        -- ["icons"] = { "", "ﰕ" },
-        -- ["icons"] = { "", "" },
-        -- ["icons"] = { "", "" },
-        ["icons"] = { "ﱢ", "" },
-        ["border"] = "rounded", -- none | single | double | rounded | solid | shadow
-        ["keymap"] = { -- mapping example:
-          ["U"] = "<Plug>ColorPickerSlider5Decrease",
-          ["O"] = "<Plug>ColorPickerSlider5Increase",
-        },
-        ["background_highlight_group"] = "Normal", -- default
-        ["border_highlight_group"] = "FloatBorder", -- default
-        ["text_highlight_group"] = "Normal", --default
-      })
-
-      vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
-    end
-  },
-  {
-    "Akianonymus/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup {
-        filetypes = { "*" },
-        user_default_options = {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          names = false, -- "Name" codes like Blue or blue
-          RRGGBBAA = false, -- #RRGGBBAA hex codes
-          AARRGGBB = false, -- 0xAARRGGBB hex codes
-          rgb_fn = false, -- CSS rgb() and rgba() functions
-          hsl_fn = false, -- CSS hsl() and hsla() functions
-          css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          -- Available modes for `mode`: foreground, background,  virtualtext
-          mode = "background", -- Set the display mode.
-          -- Available methods are false / true / "normal" / "lsp" / "both"
-          -- True is same as normal
-          tailwind = true, -- Enable tailwind colors
-          virtualtext = "■",
-        },
-        -- all the sub-options of filetypes apply to buftypes
-        buftypes = {},
-      }
-    end
-  },
   {
     "David-Kunz/markid",
     config = function()
@@ -242,7 +185,19 @@ lvim.plugins = {
     config = function()
       require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end
-  }
+  },
+  {
+    "uga-rosa/ccc.nvim",
+    config = function()
+      local ccc = require("ccc")
+      ccc.setup({
+        highlight_mode = "bg",
+        highlighter = {
+          auto_enable = true,
+        },
+      })
+    end
+  },
 }
 
 -- better mapping
@@ -257,6 +212,9 @@ local function map(mode, keys, cmd)
     lvim.keys.term_mode[keys] = cmd
   end
 end
+
+-- mapping for ccc
+map("n", "<C-c>", ":CccPick <CR>")
 
 -- Disable nonsense recoding
 map("n", "q", ":noh <CR>")

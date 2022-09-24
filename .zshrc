@@ -30,7 +30,7 @@ miniplug load
 # end zsh package manager
 
 # change suggestions strategy
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '\t' autosuggest-accept
 
 # Global ENV
