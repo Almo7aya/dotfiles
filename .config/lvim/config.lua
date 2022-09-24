@@ -1,13 +1,13 @@
 -- general
-lvim.format_on_save                = false
-lvim.log.level                     = "warn"
-lvim.colorscheme                   = "neogruvbox"
-vim.opt.cmdheight                  = 1
-vim.opt.relativenumber             = true
-vim.opt.foldmethod                 = "expr"
-vim.opt.foldexpr                   = "nvim_treesitter#foldexpr()"
-vim.opt.fillchars                  = "fold: "
-vim.opt.foldlevel                  = 99
+lvim.format_on_save    = false
+lvim.log.level         = "warn"
+lvim.colorscheme       = "neogruvbox"
+vim.opt.cmdheight      = 1
+vim.opt.relativenumber = true
+vim.opt.foldmethod     = "expr"
+vim.opt.foldexpr       = "nvim_treesitter#foldexpr()"
+vim.opt.fillchars      = "fold: "
+vim.opt.foldlevel      = 99
 
 vim.opt.guifont = { "FiraCode Nerd Font Mono", "h12" }
 
@@ -99,6 +99,27 @@ lvim.plugins = {
         left = { ' ', wilder.popupmenu_devicons() },
         right = { ' ', wilder.popupmenu_scrollbar() },
       }))
+      wilder.set_option('pipeline', {
+        wilder.branch(
+          wilder.cmdline_pipeline({
+            -- sets the language to use, 'vim' and 'python' are supported
+            language = 'python',
+            -- 0 turns off fuzzy matching
+            -- 1 turns on fuzzy matching
+            -- 2 partial fuzzy matching (match does not have to begin with the same first letter)
+            fuzzy = 1,
+          }),
+          wilder.python_search_pipeline({
+            -- can be set to wilder#python_fuzzy_delimiter_pattern() for stricter fuzzy matching
+            pattern = wilder.python_fuzzy_pattern(),
+            -- omit to get results in the order they appear in the buffer
+            sorter = wilder.python_difflib_sorter(),
+            -- can be set to 're2' for performance, requires pyre2 to be installed
+            -- see :h wilder#python_search() for more details
+            engine = 're',
+          })
+        ),
+      })
     end
   },
   {
@@ -115,7 +136,7 @@ lvim.plugins = {
     branch = 'v2', -- optional but strongly recommended
     event = "BufRead",
     config = function()
-      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+      require 'hop'.setup { keys = "hjfdnvsla" }
       vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", { silent = true })
       -- vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })
       -- place this in one of your configuration file(s)
@@ -237,8 +258,20 @@ local function map(mode, keys, cmd)
   end
 end
 
+-- Disable nonsense recoding
+map("n", "q", ":noh <CR>")
+
+-- navigate in insert_mode
+map("i", "<C-h>", "<Left>")
+map("i", "<C-l>", "<Right>")
+map("i", "<C-j>", "<Down>")
+map("i", "<C-k>", "<Up>")
+
 -- hop when in visual_mode
 map("n", "<S-s>", ":lua require('tsht').nodes()<CR>")
+
+-- enter command more when clicking ;
+map("n", ";", ":")
 
 -- better cursor moves in visual mode
 map("v", "<S-l>", "g_")

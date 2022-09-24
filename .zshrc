@@ -65,6 +65,9 @@ alias ports="lsof -i -P -n | grep LISTEN"
 # taskell
 alias todo="taskell ~/Documents/taskell.md"
 
+# Kitty aliases
+alias d="kitty +kitten diff"
+
 # # un - archive extractor
 # # usage: un <file>
 un ()

@@ -12,8 +12,11 @@
 #   - and iTerm2 is configured to let option key act as +Esc
 #   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
 # then uncomment the following line to make Meta + arrow keys mapping work
-set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
+# set -ga terminal-overrides "<ESC>[2*x<ESC>[4;3;11;10;44$r<ESC>[*x"
 
+# ,xterm*:sitm=\E[3m
+# set -g default-terminal "tmux-256color"
+set -g default-terminal "xterm-kitty"
 
 # -- windows & pane creation ---------------------------------------------------
 

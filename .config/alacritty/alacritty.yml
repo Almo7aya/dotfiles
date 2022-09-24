@@ -5,14 +5,25 @@ window:
 # Font configuration
 font:
   normal:
-    family: FiraCode Nerd Font
-  size: 16.0
+    family: FiraCode Nerd Font Mono
+
+  bold:
+    family: FiraCode Nerd Font Mono
+
+  italic:
+    family: FiraCode Nerd Font Mono
+
+  bold_italic:
+    family: FiraCode Nerd Font Mono
+
+
+  size: 15.0
 
 # Font configuration
-shell:
-  program: /bin/zsh
-  args:
-    - -l
-    - -c
-    - "tmux attach || tmux"
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - -l
+#     - -c
+#     - "tmux attach || tmux"
 
