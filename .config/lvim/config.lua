@@ -1,13 +1,16 @@
 -- general
-lvim.log.level         = "warn"
-lvim.format_on_save    = false
-lvim.colorscheme       = "neogruvbox"
-vim.opt.cmdheight      = 1
-vim.opt.relativenumber = true
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.fillchars      = "fold: "
-vim.opt.foldlevel      = 99
+lvim.format_on_save                = false
+lvim.log.level                     = "warn"
+lvim.colorscheme                   = "neogruvbox"
+vim.opt.cmdheight                  = 1
+vim.opt.relativenumber             = true
+vim.opt.foldmethod                 = "expr"
+vim.opt.foldexpr                   = "nvim_treesitter#foldexpr()"
+vim.opt.fillchars                  = "fold: "
+vim.opt.foldlevel                  = 99
+
+vim.opt.guifont = { "FiraCode Nerd Font Mono", "h12" }
+
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -46,6 +49,41 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
+-- indent_blankline config
+-- 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
+vim.opt.listchars = {
+  space = "␣",
+  eol = "↴",
+  trail = "~",
+  extends = ">",
+  precedes = "<",
+  tab = "->"
+}
+
+vim.opt.list = true
+
+lvim.builtin.indentlines.options.show_end_of_line = true
+lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
+
+lvim.builtin.indentlines.options.char_list = { "▏", "¦", "┆", "┊", "⦚", "⸾", "‖" }
+
+lvim.builtin.indentlines.options.char = nil
+
+lvim.builtin.indentlines.options.buftype_exclude = { "terminal", "nofile" }
+lvim.builtin.indentlines.options.filetype_exclude = {
+  "help",
+  "startify",
+  "dashboard",
+  "packer",
+  "neogitstatus",
+  "NvimTree",
+  "Trouble",
+  "text",
+  "LspInstallInfo",
+  "lspconfig",
+  "mason"
+}
+
 -- lvim user custom plugins
 lvim.plugins = {
   { "almo7aya/neogruvbox.nvim" },
@@ -73,40 +111,13 @@ lvim.plugins = {
     end
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      -- 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
-      vim.opt.listchars = {
-        space = "␣",
-        eol = "↴",
-        trail = "~",
-        extends = ">",
-        precedes = "<",
-        tab = "->"
-      }
-
-      vim.opt.list = true
-
-      require("indent_blankline").setup {
-        show_current_context = true,
-        show_trailing_blankline_indent = true,
-        show_first_indent_level = true,
-        show_end_of_line = true,
-        use_treesitter = true,
-        char_list = { "|", "¦", "┆", "┊", "⦚", "⸾", "‖" },
-        buftype_exclude = { "terminal" },
-        filetype_exclude = { "help", "terminal", "packer", "alpha", "LspInstallInfo", "lspconfig", "mason" }
-      }
-    end
-  },
-  {
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
     event = "BufRead",
     config = function()
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
       vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", { silent = true })
-      vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })
+      -- vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })
       -- place this in one of your configuration file(s)
       vim.api.nvim_set_keymap('', 'f',
         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
@@ -198,18 +209,17 @@ lvim.plugins = {
     end
   },
   {
-    "samodostal/image.nvim",
+    "David-Kunz/markid",
     config = function()
-      require('image').setup {
-        render = {
-          min_padding = 5,
-          show_label = true,
-          use_dither = true,
-        },
-        events = {
-          update_on_nvim_resize = true,
-        },
+      require 'nvim-treesitter.configs'.setup {
+        markid = { enable = true }
       }
+    end
+  },
+  {
+    "mfussenegger/nvim-treehopper",
+    config = function()
+      require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end
   }
 }
@@ -226,6 +236,9 @@ local function map(mode, keys, cmd)
     lvim.keys.term_mode[keys] = cmd
   end
 end
+
+-- hop when in visual_mode
+map("n", "<S-s>", ":lua require('tsht').nodes()<CR>")
 
 -- better cursor moves in visual mode
 map("v", "<S-l>", "g_")
