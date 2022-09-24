@@ -40,6 +40,7 @@ export EDITOR='lvim'
 export VISUAL='lvim'
 
 # Custom aliases
+alias dash="gh dash"
 alias ls="lsd"
 alias ll="lsd -la"
 alias gs="git status"
@@ -67,6 +68,9 @@ alias todo="taskell ~/Documents/taskell.md"
 
 # Kitty aliases
 alias d="kitty +kitten diff"
+
+#alias for stupid $ in github readmes
+alias "$"="echo"
 
 # # un - archive extractor
 # # usage: un <file>
@@ -108,8 +112,8 @@ SPACESHIP_PROMPT_ORDER=(
   node          # Node.js section
   # ruby          # Ruby section
   # elixir        # Elixir section
-  # xcode         # Xcode section
-  # swift         # Swift section
+  xcode         # Xcode section
+  swift         # Swift section
   # golang        # Go section
   # php           # PHP section
   rust          # Rust section
