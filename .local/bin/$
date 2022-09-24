@@ -1,0 +1,3 @@
+#!/bin/bash
+# to fix the stupid error $ command no found in the github redmeans
+"$@"

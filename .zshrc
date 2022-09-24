@@ -69,9 +69,6 @@ alias todo="taskell ~/Documents/taskell.md"
 # Kitty aliases
 alias d="kitty +kitten diff"
 
-#alias for stupid $ in github readmes
-alias "$"="echo"
-
 # # un - archive extractor
 # # usage: un <file>
 un ()
