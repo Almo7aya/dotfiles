@@ -1,0 +1,41 @@
+prSections:
+- title: My Pull Requests
+  filters: is:open author:@me
+- title: Needs My Review
+  filters: is:open review-requested:@me
+- title: Involved
+  filters: is:open involves:@me -author:@me
+issuesSections:
+- title: My Issues
+  filters: is:open author:@me
+- title: Assigned
+  filters: is:open assignee:@me
+- title: Involved
+  filters: is:open involves:@me -author:@me
+defaults:
+  preview:
+    open: true
+    width: 50
+  prsLimit: 20
+  issuesLimit: 20
+  view: prs
+keybindings:
+  prs: []
+repoPaths: {}
+pager:
+  diff: ""
+theme:
+  colors:
+    text:
+      primary: "#E2E1ED"
+      secondary: "#ffffff"
+      inverted: "#ebdbb2"
+      faint: "#adb026"
+      warning: "#94151b"
+      success: "#749689"
+    background:
+      selected: "#39386B"
+    border:
+      primary: "#83a598"
+      secondary: "#83a598"
+      faint: "#749689"
