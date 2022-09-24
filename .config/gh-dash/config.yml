@@ -19,11 +19,8 @@ defaults:
   prsLimit: 20
   issuesLimit: 20
   view: prs
-keybindings:
-  prs: []
-repoPaths: {}
-pager:
-  diff: ""
+repoPaths:
+  anghami/*: ~/Projects/Anghami/*
 theme:
   colors:
     text:
