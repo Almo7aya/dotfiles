@@ -1,0 +1,18 @@
+# window configuration
+window:
+  startup_mode: Maximized
+
+# Font configuration
+font:
+  normal:
+    family: FiraCode Nerd Font
+  size: 16.0
+
+# Font configuration
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux attach || tmux"
+
