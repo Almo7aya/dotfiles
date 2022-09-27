@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=5000
@@ -15,7 +17,7 @@ compinit
 # End of lines added by compinstall
 
 # zsh package manager:
-source "$HOME/.local/share/miniplug.zsh"
+source "$HOME/.local/share/miniplug/miniplug/miniplug.zsh"
 miniplug plugin zsh-users/zsh-syntax-highlighting
 miniplug plugin jeffreytse/zsh-vi-mode
 miniplug plugin zsh-users/zsh-completions
@@ -23,6 +25,11 @@ miniplug plugin zsh-users/zsh-autosuggestions
 miniplug plugin agkozak/zsh-z
 miniplug plugin wfxr/forgit
 miniplug plugin Bhupesh-V/ugit
+miniplug plugin peterhurford/git-it-on.zsh
+miniplug plugin zdharma-continuum/fast-syntax-highlighting
+miniplug plugin supercrabtree/k
+miniplug plugin b4b4r07/enhancd
+
 # Theme
 miniplug theme spaceship-prompt/spaceship-prompt
 
@@ -30,11 +37,11 @@ miniplug load
 # end zsh package manager
 
 # change suggestions strategy
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-bindkey '\t' autosuggest-accept
+# ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# bindkey '\t' autosuggest-accept
 
 # Global ENV
-#export TERM="xterm-kitty"
+export TERM="xterm-kitty"
 #export TERM="xterm-256color"
 export EDITOR='lvim'
 export VISUAL='lvim'
@@ -136,3 +143,5 @@ SPACESHIP_PROMPT_ORDER=(
   char          # Prompt character
 )
 
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

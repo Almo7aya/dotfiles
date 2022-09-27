@@ -87,6 +87,7 @@ lvim.builtin.indentlines.options.filetype_exclude = {
 -- lvim user custom plugins
 lvim.plugins = {
   { "almo7aya/neogruvbox.nvim" },
+  { "almo7aya/openingh.nvim" },
   { "kdheepak/lazygit.nvim" },
   { "nvim-treesitter/nvim-treesitter-context" },
   {
@@ -197,7 +198,7 @@ lvim.plugins = {
         },
       })
     end
-  },
+  }
 }
 
 -- better mapping
@@ -212,6 +213,10 @@ local function map(mode, keys, cmd)
     lvim.keys.term_mode[keys] = cmd
   end
 end
+
+-- mapping openingh.nvim
+map("n", "<Leader>gm", ":OpenInGHRepo <CR>")
+map("n", "<Leader>gf", ":OpenInGHFile <CR>")
 
 -- mapping for ccc
 map("n", "<C-c>", ":CccPick <CR>")

@@ -388,6 +388,12 @@ bind x killp
 unbind q
 bind q confirm kill-window
 
+unbind c
+unbind t
+bind t new-window
+
+bind o resize-pane -Z
+
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
 
