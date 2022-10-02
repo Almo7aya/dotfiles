@@ -1,0 +1,120 @@
+{
+  "title": "Mouse to HJKL",
+  "rules": [
+    {
+      "description": "Mouse to HJKL",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "mouse_key": {
+                "y": 1000
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "mouse_key": {
+                "y": -1000
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "mouse_key": {
+                "x": 1000
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "mouse_key": {
+                "x": -1000
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button1"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "mandatory": [
+                "left_control",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "pointing_button": "button2"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

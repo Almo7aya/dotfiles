@@ -19,11 +19,6 @@
             ],
             "simultaneous_options": {
               "key_down_order": "strict"
-            },
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
             }
           },
           "to": [

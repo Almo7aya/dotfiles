@@ -11,7 +11,6 @@ vim.opt.foldlevel      = 99
 
 vim.opt.guifont = { "Fisa Code", "h12" }
 
-
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -133,29 +132,6 @@ lvim.plugins = {
     end
   },
   {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
-    event = "BufRead",
-    config = function()
-      require 'hop'.setup { keys = "hjfdnvsla" }
-      vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", { silent = true })
-      -- vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })
-      -- place this in one of your configuration file(s)
-      vim.api.nvim_set_keymap('', 'f',
-        "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-        , {})
-      vim.api.nvim_set_keymap('', 'F',
-        "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-        , {})
-      vim.api.nvim_set_keymap('', 't',
-        "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>"
-        , {})
-      vim.api.nvim_set_keymap('', 'T',
-        "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>"
-        , {})
-    end
-  },
-  {
     "ray-x/lsp_signature.nvim",
     config = function() require "lsp_signature".on_attach() end,
     event = "BufRead",
@@ -170,7 +146,6 @@ lvim.plugins = {
       vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
       vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
       vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
-      vim.api.nvim_command("augroup END")
     end
   },
   {
@@ -179,12 +154,6 @@ lvim.plugins = {
       require 'nvim-treesitter.configs'.setup {
         markid = { enable = true }
       }
-    end
-  },
-  {
-    "mfussenegger/nvim-treehopper",
-    config = function()
-      require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end
   },
   {
@@ -198,7 +167,7 @@ lvim.plugins = {
         },
       })
     end
-  }
+  },
 }
 
 -- better mapping

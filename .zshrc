@@ -102,6 +102,7 @@ un ()
 export GPG_TTY=$(tty)
 
 eval "$(mcfly init zsh)"
+eval "$(rbenv init - zsh)"
 
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
@@ -145,3 +146,7 @@ SPACESHIP_PROMPT_ORDER=(
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
