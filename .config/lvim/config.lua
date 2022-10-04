@@ -165,8 +165,7 @@ lvim.plugins = {
     end,
   },
   {
-    "uga-rosa/ccc.Nvim",
-    branch = "check",
+    "uga-rosa/ccc.nvim",
     config = function()
       local ccc = require("ccc")
       ccc.setup({
