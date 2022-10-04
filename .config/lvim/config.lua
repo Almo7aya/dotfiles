@@ -312,6 +312,10 @@ linters.setup({
     command = "jsonlint",
     filetypes = { "json" },
   },
+  {
+    command = "shellcheck",
+    filetype = { "sh" },
+  },
 })
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
@@ -335,7 +339,7 @@ formatters.setup({
   },
   {
     command = "beautysh",
-    filetypes = { "bash", "csh", "ksh", "sh", "zsh" },
+    filetypes = { "bash", "csh", "ksh", "zsh" },
   },
   {
     command = "fixjson",
@@ -345,7 +349,8 @@ formatters.setup({
     command = "taplo",
     filetype = { "toml" },
   },
-  -- {
-  --   command = "trim_whitespace"
-  -- }
+  {
+    command = "shfmt",
+    filetype = { "sh" },
+  },
 })
