@@ -268,6 +268,10 @@ actions.setup({
     command = "gitsigns",
     filetypes = {},
   },
+  {
+    command = "gitrebase",
+    filetypes = {},
+  },
 })
 
 -- set additional linters
@@ -287,6 +291,7 @@ linters.setup({
   },
   {
     command = "codespell",
+    filetypes = {},
   },
   {
     command = "stylelint",
@@ -339,6 +344,7 @@ formatters.setup({
   },
   {
     command = "codespell",
+    filetypes = {},
   },
   {
     command = "taplo",
