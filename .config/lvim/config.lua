@@ -97,6 +97,7 @@ lvim.plugins = {
     config = function()
       local wilder = require("wilder")
       wilder.setup({ modes = { ":", "/", "?" } })
+      vim.cmd("call wilder#set_option('noselect', 0)")
       wilder.set_option(
         "renderer",
         wilder.popupmenu_renderer({
