@@ -1,13 +1,16 @@
 -- general
-lvim.format_on_save    = false
-lvim.log.level         = "warn"
-lvim.colorscheme       = "neogruvbox"
-vim.opt.cmdheight      = 1
+lvim.format_on_save = false
+lvim.log.level = "warn"
+lvim.colorscheme = "neogruvbox"
+vim.opt.cmdheight = 1
 vim.opt.relativenumber = true
-vim.opt.foldmethod     = "expr"
-vim.opt.foldexpr       = "nvim_treesitter#foldexpr()"
-vim.opt.fillchars      = "fold: "
-vim.opt.foldlevel      = 99
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.fillchars = "fold: "
+vim.opt.foldlevel = 99
+-- vim.opt.winbar = "%f"
+-- to hide commandff line neovim 8
+vim.o.ch = 0
 
 vim.opt.guifont = { "Fisa Code", "h12" }
 
@@ -27,7 +30,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = true
 
-lvim.builtin.gitsigns.opts.current_line_blame = true;
+lvim.builtin.gitsigns.opts.current_line_blame = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -56,7 +59,7 @@ vim.opt.listchars = {
   trail = "~",
   extends = ">",
   precedes = "<",
-  tab = "->"
+  tab = "->",
 }
 
 vim.opt.list = true
@@ -80,7 +83,7 @@ lvim.builtin.indentlines.options.filetype_exclude = {
   "text",
   "LspInstallInfo",
   "lspconfig",
-  "mason"
+  "mason",
 }
 
 -- lvim user custom plugins
@@ -92,18 +95,21 @@ lvim.plugins = {
   {
     "gelguy/wilder.nvim",
     config = function()
-      local wilder = require('wilder')
-      wilder.setup({ modes = { ':', '/', '?' } })
-      wilder.set_option('renderer', wilder.popupmenu_renderer({
-        highlighter = wilder.basic_highlighter(),
-        left = { ' ', wilder.popupmenu_devicons() },
-        right = { ' ', wilder.popupmenu_scrollbar() },
-      }))
-      wilder.set_option('pipeline', {
+      local wilder = require("wilder")
+      wilder.setup({ modes = { ":", "/", "?" } })
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer({
+          highlighter = wilder.basic_highlighter(),
+          left = { " ", wilder.popupmenu_devicons() },
+          right = { " ", wilder.popupmenu_scrollbar() },
+        })
+      )
+      wilder.set_option("pipeline", {
         wilder.branch(
           wilder.cmdline_pipeline({
             -- sets the language to use, 'vim' and 'python' are supported
-            language = 'python',
+            language = "python",
             -- 0 turns off fuzzy matching
             -- 1 turns on fuzzy matching
             -- 2 partial fuzzy matching (match does not have to begin with the same first letter)
@@ -116,24 +122,26 @@ lvim.plugins = {
             -- sorter = wilder.python_difflib_sorter(),
             -- can be set to 're2' for performance, requires pyre2 to be installed
             -- see :h wilder#python_search() for more details
-            engine = 're',
+            engine = "re",
           })
         ),
       })
-    end
+    end,
   },
   {
     "ntpeters/vim-better-whitespace",
     config = function()
-      vim.cmd('highlight ExtraWhitespace ctermbg=8 guibg=#282c34')
+      vim.cmd("highlight ExtraWhitespace ctermbg=8 guibg=#282c34")
       vim.g.better_whitespace_enabled = 1
       vim.g.strip_whitespace_on_save = 1
       vim.g.strip_whitespace_confirm = 0
-    end
+    end,
   },
   {
     "ray-x/lsp_signature.nvim",
-    config = function() require "lsp_signature".on_attach() end,
+    config = function()
+      require("lsp_signature").on_attach()
+    end,
     event = "BufRead",
   },
   {
@@ -146,18 +154,19 @@ lvim.plugins = {
       vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
       vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
       vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
-    end
+    end,
   },
   {
     "David-Kunz/markid",
     config = function()
-      require 'nvim-treesitter.configs'.setup {
-        markid = { enable = true }
-      }
-    end
+      require("nvim-treesitter.configs").setup({
+        markid = { enable = true },
+      })
+    end,
   },
   {
-    "uga-rosa/ccc.nvim",
+    "uga-rosa/ccc.Nvim",
+    branch = "check",
     config = function()
       local ccc = require("ccc")
       ccc.setup({
@@ -166,19 +175,19 @@ lvim.plugins = {
           auto_enable = true,
         },
       })
-    end
+    end,
   },
 }
 
 -- better mapping
 local function map(mode, keys, cmd)
-  if (mode == "n") then
+  if mode == "n" then
     lvim.keys.normal_mode[keys] = cmd
-  elseif (mode == "v") then
+  elseif mode == "v" then
     lvim.keys.visual_mode[keys] = cmd
-  elseif (mode == "i") then
+  elseif mode == "i" then
     lvim.keys.insert_mode[keys] = cmd
-  elseif (mode == "t") then
+  elseif mode == "t" then
     lvim.keys.term_mode[keys] = cmd
   end
 end
@@ -215,10 +224,6 @@ map("n", "<A-k>", ":resize -2<CR>")
 map("n", "<A-j>", ":resize +2<CR>")
 map("n", "<A-h>", ":vertical resize -2<CR>")
 map("n", "<A-l>", ":vertical resize +2<CR>")
--- better escape
-map("i", "JK", "<Esc>")
-map("i", "jl", "<Esc>")
-map("i", "JL", "<Esc>")
 -- copy whole file content
 map("n", "<Leader>aa", ":%y+ <CR>") -- copy whole file content
 -- don't yank text on cut ( x )
@@ -228,12 +233,10 @@ map("v", "x", '"_x')
 map("v", "p", '"_dP')
 -- use ESC to turn off search highlighting
 map("n", "<Esc>", ":noh <CR>")
--- Escapes terminal
-map("t", "JK", "<C-\\><C-n>")
 -- bufferline --
 -- Move to previous/next
-map('n', '<S-j>', ':BufferLineCyclePrev<CR>')
-map('n', 'K', ':BufferLineCycleNext<CR>')
+map("n", "<S-j>", ":BufferLineCyclePrev<CR>")
+map("n", "K", ":BufferLineCycleNext<CR>")
 
 -- hack lsp K map to H and make H switch to next butter
 lvim.lsp.buffer_mappings.normal_mode.H = lvim.lsp.buffer_mappings.normal_mode.K
@@ -241,18 +244,107 @@ lvim.keys.normal_mode["h"] = false
 lvim.lsp.buffer_mappings.normal_mode.K = { ":BufferLineCycleNext<CR>" }
 
 -- Close buffer
-map('n', '<S-q>', ':BufferClose<CR>')
-map('n', '<C-p>', ':BufferLinePick<CR>')
+map("n", "<S-q>", ":BufferClose<CR>")
+map("n", "<C-p>", ":BufferLinePick<CR>")
 
 -- Open terminals
-map("n", "<Leader>th",
-  ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
-map("n", "<Leader>tv",
-  ":execute 'vnew +terminal' | let b:term_type = 'vert' | startinsert <CR>")
-map("n", "<Leader>tw",
-  ":execute 'terminal' | let b:term_type = 'wind' | startinsert <CR>")
+map("n", "<Leader>th", ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
+map("n", "<Leader>tv", ":execute 'vnew +terminal' | let b:term_type = 'vert' | startinsert <CR>")
+map("n", "<Leader>tw", ":execute 'terminal' | let b:term_type = 'wind' | startinsert <CR>")
 
 -- disable jk, jj and kj mapping for escape since we have system wide jk for escape
 lvim.keys.insert_mode["jk"] = false
 lvim.keys.insert_mode["kj"] = false
 lvim.keys.insert_mode["jj"] = false
+
+-- set additional code-actions
+local actions = require("lvim.lsp.null-ls.code_actions")
+actions.setup({
+  {
+    command = "eslint_d",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  },
+  {
+    command = "gitsigns",
+    filetypes = {},
+  },
+})
+
+-- set additional linters
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+  {
+    command = "eslint_d",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  },
+  {
+    command = "tsc",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  },
+  {
+    command = "luacheck",
+    filetypes = { "lua" },
+  },
+  {
+    command = "codespell",
+  },
+  {
+    command = "stylelint",
+    filetypes = { "scss", "less", "css", "sass" },
+  },
+  {
+    command = "vint",
+    filetypes = { "vim" },
+  },
+  {
+    command = "yamllint",
+    filetypes = { "yaml" },
+  },
+  {
+    command = "zsh",
+    filetypes = { "zsh" },
+  },
+  {
+    command = "jsonlint",
+    filetypes = { "json" },
+  },
+})
+
+-- set a formatter, this will override the language server formatting capabilities (if it exists)
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+  {
+    command = "prettierd",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  },
+  {
+    command = "eslint_d",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  },
+  {
+    command = "rustfmt",
+    filetypes = { "rust", "rs" },
+  },
+  {
+    command = "stylua",
+    filetypes = { "lua" },
+  },
+  {
+    command = "beautysh",
+    filetypes = { "bash", "csh", "ksh", "sh", "zsh" },
+  },
+  {
+    command = "fixjson",
+    filetypes = { "json" },
+  },
+  {
+    command = "codespell",
+  },
+  {
+    command = "taplo",
+    filetype = { "toml" },
+  },
+  -- {
+  --   command = "trim_whitespace"
+  -- }
+})
