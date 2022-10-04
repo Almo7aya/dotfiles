@@ -342,10 +342,6 @@ formatters.setup({
     filetypes = { "json" },
   },
   {
-    command = "codespell",
-    filetypes = {},
-  },
-  {
     command = "taplo",
     filetype = { "toml" },
   },
