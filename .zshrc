@@ -1,7 +1,5 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+hISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
 setopt appendhistory
@@ -144,9 +142,3 @@ SPACESHIP_PROMPT_ORDER=(
   char          # Prompt character
 )
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
