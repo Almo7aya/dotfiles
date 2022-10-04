@@ -8,7 +8,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.fillchars = "fold: "
 vim.opt.foldlevel = 99
--- vim.opt.winbar = "%f"
+
 -- to hide commandff line neovim 8
 vim.o.ch = 0
 
@@ -54,8 +54,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- indent_blankline config
 -- 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
 vim.opt.listchars = {
-  space = "␣",
-  eol = "↴",
+  space = "₋",
+  eol = "⤶",
   trail = "~",
   extends = ">",
   precedes = "<",
@@ -67,7 +67,7 @@ vim.opt.list = true
 lvim.builtin.indentlines.options.show_end_of_line = true
 lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
 
-lvim.builtin.indentlines.options.char_list = { "▏", "¦", "┆", "┊", "⦚", "⸾", "‖" }
+lvim.builtin.indentlines.options.char_list = { "▏", "▏", "▏", "▏", "▏", "▏", "▏" }
 
 lvim.builtin.indentlines.options.char = nil
 
@@ -288,10 +288,6 @@ linters.setup({
   {
     command = "luacheck",
     filetypes = { "lua" },
-  },
-  {
-    command = "codespell",
-    filetypes = {},
   },
   {
     command = "stylelint",
