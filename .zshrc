@@ -100,7 +100,6 @@ un ()
 export GPG_TTY=$(tty)
 
 eval "$(mcfly init zsh)"
-eval "$(rbenv init - zsh)"
 
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section

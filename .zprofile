@@ -3,8 +3,6 @@ export PATH="/opt/homebrew/opt/node@16/bin:/opt/homebrew/opt/openjdk/bin:/Users/
 
 export PATH="$PATH:$HOME/go/bin"
 
-export PATH="$PATH:$HOME/.gem/ruby/3.0.0/bin"
-
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 
 export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS"
