@@ -1,0 +1,27 @@
+# vim keys
+unbind-key h
+unbind-key j
+unbind-key k
+unbind-key l
+
+bind-key h quit
+bind-key j down
+bind-key k up
+bind-key l open
+
+# Colors
+color background         default   default
+color listnormal         color245  default
+color listnormal_unread  default   default bold
+color listfocus          black     yellow
+color listfocus_unread   black     yellow bold
+color info               color245  black bold
+color article            default   default
+
+# highlights
+highlight article "^(Title):.*$" blue default
+highlight article "https?://[^ ]+" red default
+highlight article "\\[image\\ [0-9]+\\]" green default
+# highlight all "ux" green default
+
+browser "open %u"
