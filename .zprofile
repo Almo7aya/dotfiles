@@ -7,6 +7,8 @@ export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 
 export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS"
 
+export PATH="$PATH:$HOME/.bin"
+
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 export CC="/usr/bin/g++"

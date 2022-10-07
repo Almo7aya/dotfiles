@@ -8,6 +8,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.fillchars = "fold: "
 vim.opt.foldlevel = 99
+vim.opt.spell = true
 
 -- to hide commandff line neovim 8
 vim.o.ch = 0
@@ -91,13 +92,11 @@ lvim.plugins = {
   { "almo7aya/neogruvbox.nvim" },
   { "almo7aya/openingh.nvim" },
   { "kdheepak/lazygit.nvim" },
-  { "nvim-treesitter/nvim-treesitter-context" },
   {
     "gelguy/wilder.nvim",
     config = function()
       local wilder = require("wilder")
       wilder.setup({ modes = { ":", "/", "?" } })
-      vim.cmd("call wilder#set_option('noselect', 0)")
       wilder.set_option(
         "renderer",
         wilder.popupmenu_renderer({
@@ -155,14 +154,6 @@ lvim.plugins = {
       vim.api.nvim_command("autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
       vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
       vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
-    end,
-  },
-  {
-    "David-Kunz/markid",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        markid = { enable = true },
-      })
     end,
   },
   {
@@ -274,6 +265,9 @@ actions.setup({
   },
 })
 
+-- set additional LSPs
+require("lvim.lsp.manager").setup("grammarly", nil)
+
 -- set additional linters
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
@@ -289,10 +283,10 @@ linters.setup({
     command = "luacheck",
     filetypes = { "lua" },
   },
-  {
-    command = "stylelint",
-    filetypes = { "scss", "less", "css", "sass" },
-  },
+  -- {
+  --   command = "stylelint",
+  --   filetypes = { "scss", "less", "css", "sass" },
+  -- },
   {
     command = "vint",
     filetypes = { "vim" },
