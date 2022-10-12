@@ -9,6 +9,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.fillchars = "fold: "
 vim.opt.foldlevel = 99
 vim.opt.spell = true
+vim.opt.tabstop = 2
 
 -- to hide commandff line neovim 8
 vim.o.ch = 0
@@ -30,6 +31,28 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = true
+lvim.builtin.nvimtree.setup.hijack_cursor = true
+lvim.builtin.nvimtree.setup.update_cwd = true
+lvim.builtin.nvimtree.setup.reload_on_bufenter = true
+lvim.builtin.nvimtree.setup.filesystem_watchers = {
+  enable = true,
+}
+
+lvim.builtin.nvimtree.setup.view.float = {
+  enable = true,
+  open_win_config = {
+    border = "rounded",
+    width = 100,
+    height = 30,
+    row = 5,
+    col = 45,
+  },
+}
+
+lvim.builtin.nvimtree.setup.update_focused_file = {
+  enable = true,
+  update_cwd = false,
+}
 
 lvim.builtin.gitsigns.opts.current_line_blame = true
 
@@ -90,44 +113,11 @@ lvim.builtin.indentlines.options.filetype_exclude = {
 -- lvim user custom plugins
 lvim.plugins = {
   { "almo7aya/neogruvbox.nvim" },
-  { "almo7aya/openingh.nvim" },
-  { "kdheepak/lazygit.nvim" },
   {
-    "gelguy/wilder.nvim",
-    config = function()
-      local wilder = require("wilder")
-      wilder.setup({ modes = { ":", "/", "?" } })
-      wilder.set_option(
-        "renderer",
-        wilder.popupmenu_renderer({
-          highlighter = wilder.basic_highlighter(),
-          left = { " ", wilder.popupmenu_devicons() },
-          right = { " ", wilder.popupmenu_scrollbar() },
-        })
-      )
-      wilder.set_option("pipeline", {
-        wilder.branch(
-          wilder.cmdline_pipeline({
-            -- sets the language to use, 'vim' and 'python' are supported
-            language = "python",
-            -- 0 turns off fuzzy matching
-            -- 1 turns on fuzzy matching
-            -- 2 partial fuzzy matching (match does not have to begin with the same first letter)
-            fuzzy = 1,
-          }),
-          wilder.python_search_pipeline({
-            -- can be set to wilder#python_fuzzy_delimiter_pattern() for stricter fuzzy matching
-            pattern = wilder.python_fuzzy_pattern(),
-            -- omit to get results in the order they appear in the buffer
-            -- sorter = wilder.python_difflib_sorter(),
-            -- can be set to 're2' for performance, requires pyre2 to be installed
-            -- see :h wilder#python_search() for more details
-            engine = "re",
-          })
-        ),
-      })
-    end,
+    "BSathvik/openingh.nvim",
+    branch = "vik/add_ghe_support",
   },
+  { "kdheepak/lazygit.nvim" },
   {
     "ntpeters/vim-better-whitespace",
     config = function()

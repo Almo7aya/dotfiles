@@ -13,6 +13,8 @@ export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 export CC="/usr/bin/g++"
 
+export ESLINT_D_LOCAL_ESLINT_ONLY=1
+
 ##
 # Your previous /Users/almo7aya/.zprofile file was backed up as /Users/almo7aya/.zprofile.macports-saved_2022-10-02_at_09:38:44
 ##

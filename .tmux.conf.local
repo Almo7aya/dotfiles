@@ -392,7 +392,21 @@ unbind c
 unbind t
 bind t new-window
 
+unbind C-o
+unbind o
 bind o resize-pane -Z
+bind C-o resize-pane -Z
+bind C-z rotate-window
+
+
+unbind H
+unbind J
+unbind K
+unbind L
+bind -r M-h resize-pane -L 2
+bind -r M-j resize-pane -D 2
+bind -r M-k resize-pane -U 2
+bind -r M-l resize-pane -R 2
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
