@@ -463,7 +463,7 @@ set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'artemave/tmux_super_fingers'
 set -g @plugin 'MunifTanjim/tmux-mode-indicator'
 set -g @plugin "sainnhe/tmux-fzf"
-TMUX_FZF_LAUNCH_KEY="n"
+TMUX_FZF_LAUNCH_KEY="C-n"
 
 # -- custom variables ----------------------------------------------------------
 

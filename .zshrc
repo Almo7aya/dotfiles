@@ -101,6 +101,7 @@ export GPG_TTY=$(tty)
 
 eval "$(mcfly init zsh)"
 
+SPACESHIP_BATTERY_SHOW="always"
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
   user          # Username section

@@ -22,11 +22,7 @@ vim.api.nvim_create_user_command("CargoPlay", function ()
   vim.cmd([[!cargo play %]])
 end, {})
 
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
--- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-
 lvim.builtin.alpha.active = true
 
 lvim.builtin.alpha.mode = "dashboard"
@@ -175,10 +171,11 @@ local function map(mode, keys, cmd)
 end
 
 -- mapping openingh.nvim
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 map("n", "<Leader>gm", ":OpenInGHRepo <CR>")
 map("n", "<Leader>gf", ":OpenInGHFile <CR>")
 -- mapping for ccc
-map("n", "<C-c>", ":CccPick <CR>")
+map("n", "<Leader>lc", ":CccPick <CR>")
 -- Disable nonsense recoding
 map("n", "q", ":noh <CR>")
 -- navigate in insert_mode
@@ -188,8 +185,6 @@ map("i", "<C-j>", "<Down>")
 map("i", "<C-k>", "<Up>")
 -- hop when in visual_mode
 map("n", "<S-s>", ":lua require('tsht').nodes()<CR>")
--- enter command more when clicking ;
-map("n", ";", ":")
 -- better cursor moves in visual mode
 map("v", "<S-l>", "g_")
 map("v", "<S-h>", "^")
@@ -222,7 +217,11 @@ map("n", "<S-x>", ":BufferClose<CR>")
 map("n", "<C-p>", ":BufferLinePick<CR>")
 -- blameline current line
 map("n", "<S-l>", ":Gitsigns blame_line<CR>")
-
+-- vsplit and split
+map("n", "<Leader>ww", ":vsplit <CR>")
+map("n", "<Leader>wh", ":split <CR>")
+-- remap saving
+map("n", "<Leader>r", ":w <CR>")
 -- disable jk, jj and kj mapping for escape since we have system wide jk for escape
 lvim.keys.insert_mode["jk"] = false
 lvim.keys.insert_mode["kj"] = false
