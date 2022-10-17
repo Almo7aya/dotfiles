@@ -10,11 +10,17 @@ vim.opt.fillchars = "fold: "
 vim.opt.foldlevel = 99
 vim.opt.spell = true
 vim.opt.tabstop = 2
-
 -- to hide commandff line neovim 8
 vim.o.ch = 0
-
 vim.opt.guifont = { "Fisa Code", "h12" }
+-- same cursor last position
+vim.cmd([[autocmd BufLeave,BufWinLeave * silent! mkview]])
+vim.cmd([[autocmd BufReadPost * silent! loadview]])
+
+-- command! CargoPlay !cargo play %
+vim.api.nvim_create_user_command("CargoPlay", function ()
+  vim.cmd([[!cargo play %]])
+end, {})
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -49,12 +55,8 @@ lvim.builtin.nvimtree.setup.view.float = {
   },
 }
 
-lvim.builtin.nvimtree.setup.update_focused_file = {
-  enable = true,
-  update_cwd = false,
-}
-
 lvim.builtin.gitsigns.opts.current_line_blame = true
+lvim.builtin.gitsigns.opts.yadm.enable = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -114,8 +116,7 @@ lvim.builtin.indentlines.options.filetype_exclude = {
 lvim.plugins = {
   { "almo7aya/neogruvbox.nvim" },
   {
-    "BSathvik/openingh.nvim",
-    branch = "vik/add_ghe_support",
+    "almo7aya/openingh.nvim",
   },
   { "kdheepak/lazygit.nvim" },
   {
@@ -176,25 +177,19 @@ end
 -- mapping openingh.nvim
 map("n", "<Leader>gm", ":OpenInGHRepo <CR>")
 map("n", "<Leader>gf", ":OpenInGHFile <CR>")
-
 -- mapping for ccc
 map("n", "<C-c>", ":CccPick <CR>")
-
 -- Disable nonsense recoding
 map("n", "q", ":noh <CR>")
-
 -- navigate in insert_mode
 map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
 map("i", "<C-j>", "<Down>")
 map("i", "<C-k>", "<Up>")
-
 -- hop when in visual_mode
 map("n", "<S-s>", ":lua require('tsht').nodes()<CR>")
-
 -- enter command more when clicking ;
 map("n", ";", ":")
-
 -- better cursor moves in visual mode
 map("v", "<S-l>", "g_")
 map("v", "<S-h>", "^")
@@ -206,7 +201,7 @@ map("n", "<A-j>", ":resize +2<CR>")
 map("n", "<A-h>", ":vertical resize -2<CR>")
 map("n", "<A-l>", ":vertical resize +2<CR>")
 -- copy whole file content
-map("n", "<Leader>aa", ":%y+ <CR>") -- copy whole file content
+map("n", "<Leader>aa", ":silent :%y+ <CR>") -- copy whole file content
 -- don't yank text on cut ( x )
 map("n", "x", '"_x')
 map("v", "x", '"_x')
@@ -218,20 +213,15 @@ map("n", "<Esc>", ":noh <CR>")
 -- Move to previous/next
 map("n", "<S-j>", ":BufferLineCyclePrev<CR>")
 map("n", "K", ":BufferLineCycleNext<CR>")
-
 -- hack lsp K map to H and make H switch to next butter
 lvim.lsp.buffer_mappings.normal_mode.H = lvim.lsp.buffer_mappings.normal_mode.K
 lvim.keys.normal_mode["h"] = false
 lvim.lsp.buffer_mappings.normal_mode.K = { ":BufferLineCycleNext<CR>" }
-
 -- Close buffer
-map("n", "<S-q>", ":BufferClose<CR>")
+map("n", "<S-x>", ":BufferClose<CR>")
 map("n", "<C-p>", ":BufferLinePick<CR>")
-
--- Open terminals
-map("n", "<Leader>th", ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
-map("n", "<Leader>tv", ":execute 'vnew +terminal' | let b:term_type = 'vert' | startinsert <CR>")
-map("n", "<Leader>tw", ":execute 'terminal' | let b:term_type = 'wind' | startinsert <CR>")
+-- blameline current line
+map("n", "<S-l>", ":Gitsigns blame_line<CR>")
 
 -- disable jk, jj and kj mapping for escape since we have system wide jk for escape
 lvim.keys.insert_mode["jk"] = false

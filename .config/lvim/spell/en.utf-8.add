@@ -36,3 +36,13 @@ cmdline
 macOS
 BufWipeout
 NvimTree
+BufEnter
+WinLeave
+autocmd
+gitsigns
+lvim
+lazygit
+cmd
+cr
+mainWindow
+WindowsOS

@@ -29,3 +29,8 @@ export MANPATH="/opt/local/share/man:$MANPATH"
 # Finished adapting your MANPATH environment variable for use with MacPorts.
 
 
+
+
+# Added by Toolbox App
+export PATH="$PATH:/Users/almo7aya/Library/Application Support/JetBrains/Toolbox/scripts"
+
