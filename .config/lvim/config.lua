@@ -115,6 +115,7 @@ lvim.plugins = {
     "almo7aya/openingh.nvim",
   },
   { "kdheepak/lazygit.nvim" },
+  { "christoomey/vim-tmux-navigator" },
   {
     "ntpeters/vim-better-whitespace",
     config = function()
@@ -179,10 +180,10 @@ map("n", "<Leader>lc", ":CccPick <CR>")
 -- Disable nonsense recoding
 map("n", "q", ":noh <CR>")
 -- navigate in insert_mode
-map("i", "<C-h>", "<Left>")
-map("i", "<C-l>", "<Right>")
-map("i", "<C-j>", "<Down>")
-map("i", "<C-k>", "<Up>")
+-- map("i", "<C-h>", "<Left>")
+-- map("i", "<C-l>", "<Right>")
+-- map("i", "<C-j>", "<Down>")
+-- map("i", "<C-k>", "<Up>")
 -- hop when in visual_mode
 map("n", "<S-s>", ":lua require('tsht').nodes()<CR>")
 -- better cursor moves in visual mode
@@ -218,6 +219,7 @@ map("n", "<C-p>", ":BufferLinePick<CR>")
 -- blameline current line
 map("n", "<S-l>", ":Gitsigns blame_line<CR>")
 -- vsplit and split
+lvim.builtin.which_key.mappings.w = ""
 map("n", "<Leader>ww", ":vsplit <CR>")
 map("n", "<Leader>wh", ":split <CR>")
 -- remap saving
