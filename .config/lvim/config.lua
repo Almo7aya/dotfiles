@@ -18,23 +18,21 @@ vim.opt.fillchars = {
 
 vim.opt.foldlevel = 99
 vim.opt.spell = true
-vim.opt.tabstop = 2
--- to hide commandff line neovim 8
-vim.o.ch = 0
-vim.opt.guifont = { "Fisa Code", "h12" }
+
+-- vim.opt.tabstop = 2
+-- vim.o.ch = 0
+
+vim.opt.guifont = { "SauceCodePro Nerd Font", "h12" }
 
 -- same cursor last position
-vim.cmd([[autocmd BufLeave,BufWinLeave * silent! mkview]])
-vim.cmd([[autocmd BufReadPost * silent! loadview]])
+-- vim.cmd([[autocmd BufLeave,BufWinLeave * silent! mkview]])
+-- vim.cmd([[autocmd BufReadPost * silent! loadview]])
 
-lvim.leader = "space"
-lvim.builtin.alpha.active = true
 
-lvim.builtin.alpha.mode = "dashboard"
+-- terminal configs
+lvim.builtin.terminal.active = false
 
-lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
-
+-- nvimtree configs
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = true
@@ -44,7 +42,6 @@ lvim.builtin.nvimtree.setup.reload_on_bufenter = true
 lvim.builtin.nvimtree.setup.filesystem_watchers = {
   enable = true,
 }
-
 lvim.builtin.nvimtree.setup.view.float = {
   enable = true,
   open_win_config = {
@@ -56,9 +53,11 @@ lvim.builtin.nvimtree.setup.view.float = {
   },
 }
 
+-- gitsigns configs
 lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.yadm.enable = true
 
+-- treesitter configs
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -74,11 +73,10 @@ lvim.builtin.treesitter.ensure_installed = {
   "java",
   "yaml",
 }
-
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
--- indent_blankline config
+-- indent_blankline configs
 vim.opt.listchars = {
   space = "₋",
   eol = "⤶",
@@ -87,16 +85,11 @@ vim.opt.listchars = {
   precedes = "<",
   tab = "->",
 }
-
 vim.opt.list = true
-
 lvim.builtin.indentlines.options.show_end_of_line = true
 lvim.builtin.indentlines.options.show_trailing_blankline_indent = true
-
 lvim.builtin.indentlines.options.char_list = { "▏", "▏", "▏", "▏", "▏", "▏", "▏" }
-
 lvim.builtin.indentlines.options.char = nil
-
 lvim.builtin.indentlines.options.buftype_exclude = { "terminal", "nofile" }
 lvim.builtin.indentlines.options.filetype_exclude = {
   "help",
@@ -111,6 +104,20 @@ lvim.builtin.indentlines.options.filetype_exclude = {
   "lspconfig",
   "mason",
 }
+
+-- Lua line configs
+lvim.builtin.lualine.sections.lualine_a = { "mode" }
+
+-- which_key configs
+lvim.builtin.which_key.setup.plugins.marks = true
+lvim.builtin.which_key.setup.plugins.registers = true
+lvim.builtin.which_key.setup.plugins.presets.operators = true
+lvim.builtin.which_key.setup.plugins.presets.motions = true
+lvim.builtin.which_key.setup.plugins.presets.text_objects = true
+lvim.builtin.which_key.setup.plugins.presets.nav = true
+lvim.builtin.which_key.setup.plugins.presets.z = true
+lvim.builtin.which_key.setup.plugins.presets.g = true
+lvim.builtin.which_key.setup.plugins.presets.windows = true
 
 -- lvim user custom plugins
 lvim.plugins = {
@@ -175,6 +182,14 @@ local function map(mode, keys, cmd)
   end
 end
 
+-- show lsp signature_help
+map("n", "gh", ":lua vim.lsp.buf.signature_help() <CR>")
+
+-- to show the saved marks
+map("n", "mm", ":marks <CR>")
+-- disable case toggling with u and U in visual mode and set it to undo
+map("v", "u", ":<C-U>earlier <CR>");
+map("v", "U", ":<C-U>earlier <CR>");
 -- mapping openingh.nvim
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 map("n", "<Leader>gm", ":OpenInGHRepo <CR>")
@@ -219,8 +234,7 @@ map("n", "<C-p>", ":BufferLinePick<CR>")
 map("n", "<S-l>", ":Gitsigns blame_line<CR>")
 -- vsplit and split
 lvim.builtin.which_key.mappings.w = ""
-map("n", "<Leader>ww", ":vsplit <CR>")
-map("n", "<Leader>wh", ":split <CR>")
+map("n", "<Leader>w", "<C-w>")
 -- remap saving
 map("n", "<Leader>r", ":w <CR>")
 -- disable jk, jj and kj mapping for escape since we have system wide jk for escape

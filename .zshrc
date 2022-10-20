@@ -15,7 +15,7 @@ compinit
 # End of lines added by compinstall
 
 # zsh package manager:
-source "$HOME/.local/share/miniplug/miniplug.zsh"
+source "$HOME/.local/share/miniplug.zsh"
 miniplug plugin zsh-users/zsh-syntax-highlighting
 miniplug plugin jeffreytse/zsh-vi-mode
 miniplug plugin zsh-users/zsh-completions
@@ -97,7 +97,6 @@ un ()
   fi
 }
 export GPG_TTY=$(tty)
-
 eval "$(mcfly init zsh)"
 
 SPACESHIP_BATTERY_SHOW="always"
@@ -140,4 +139,8 @@ SPACESHIP_PROMPT_ORDER=(
   exit_code     # Exit code section
   char          # Prompt character
 )
+
+function zvm_after_init() {
+  zvm_bindkey viins '^R' mcfly-history-widget
+}
 
