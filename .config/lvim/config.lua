@@ -48,8 +48,9 @@ lvim.builtin.nvimtree.setup.view.float = {
     border = "rounded",
     width = 100,
     height = 30,
-    row = 5,
-    col = 45,
+    -- to lazy to add centering logic here
+    row = 10,
+    col = 58,
   },
 }
 
