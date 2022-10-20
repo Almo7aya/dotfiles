@@ -6,21 +6,26 @@ vim.opt.cmdheight = 1
 vim.opt.relativenumber = true
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.fillchars = "fold: "
+vim.opt.fillchars = {
+  vert = "│",
+  fold = "░",
+  diff = " ", -- alternatives = ⣿ ░ ─ ╱
+  msgsep = "‾",
+  foldopen = "▾",
+  foldsep = "│",
+  foldclose = "▸",
+}
+
 vim.opt.foldlevel = 99
 vim.opt.spell = true
 vim.opt.tabstop = 2
 -- to hide commandff line neovim 8
 vim.o.ch = 0
 vim.opt.guifont = { "Fisa Code", "h12" }
+
 -- same cursor last position
 vim.cmd([[autocmd BufLeave,BufWinLeave * silent! mkview]])
 vim.cmd([[autocmd BufReadPost * silent! loadview]])
-
--- command! CargoPlay !cargo play %
-vim.api.nvim_create_user_command("CargoPlay", function ()
-  vim.cmd([[!cargo play %]])
-end, {})
 
 lvim.leader = "space"
 lvim.builtin.alpha.active = true
@@ -74,7 +79,6 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- indent_blankline config
--- 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
 vim.opt.listchars = {
   space = "₋",
   eol = "⤶",
@@ -179,11 +183,6 @@ map("n", "<Leader>gf", ":OpenInGHFile <CR>")
 map("n", "<Leader>lc", ":CccPick <CR>")
 -- Disable nonsense recoding
 map("n", "q", ":noh <CR>")
--- navigate in insert_mode
--- map("i", "<C-h>", "<Left>")
--- map("i", "<C-l>", "<Right>")
--- map("i", "<C-j>", "<Down>")
--- map("i", "<C-k>", "<Up>")
 -- hop when in visual_mode
 map("n", "<S-s>", ":lua require('tsht').nodes()<CR>")
 -- better cursor moves in visual mode

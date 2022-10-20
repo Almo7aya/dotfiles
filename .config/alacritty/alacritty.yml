@@ -5,25 +5,16 @@ window:
 # Font configuration
 font:
   normal:
-    family: FiraCode Nerd Font Mono
+    family: SauceCodePro Nerd Font
 
   bold:
-    family: FiraCode Nerd Font Mono
+    family: SauceCodePro Nerd Font
 
   italic:
-    family: FiraCode Nerd Font Mono
+    family: SauceCodePro Nerd Font
 
   bold_italic:
-    family: FiraCode Nerd Font Mono
+    family: SauceCodePro Nerd Font
 
 
-  size: 15.0
-
-# Font configuration
-# shell:
-#   program: /bin/zsh
-#   args:
-#     - -l
-#     - -c
-#     - "tmux attach || tmux"
-
+  size: 13.5

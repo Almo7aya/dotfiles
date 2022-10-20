@@ -59,7 +59,7 @@ tmux_conf_24b_colour=auto
 
 # default theme
 tmux_conf_theme_colour_1="#232323"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
+tmux_conf_theme_colour_2="#282828"    # gray
 tmux_conf_theme_colour_3="#8a8a8a"    # light gray
 tmux_conf_theme_colour_4="#83a598"    # light blue
 tmux_conf_theme_colour_5="#ffff00"    # yellow
@@ -362,6 +362,8 @@ unbind C-h
 unbind C-l
 bind C-j previous-window # select previous window
 bind C-k next-window     # select next window
+bind-key -n M-J previous-window # select previous window without prefix
+bind-key -n M-K next-window     # select next window without prefix
 
 unbind m
 bind m split-window -v -l 10
@@ -408,10 +410,15 @@ unbind H
 unbind J
 unbind K
 unbind L
-bind -n -r M-h resize-pane -L 2
-bind -n -r M-j resize-pane -D 2
-bind -n -r M-k resize-pane -U 2
-bind -n -r M-l resize-pane -R 2
+bind -r M-h resize-pane -L 2
+bind -r M-j resize-pane -D 2
+bind -r M-k resize-pane -U 2
+bind -r M-l resize-pane -R 2
+bind -n M-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq nvim && tmux send-keys M-h) || tmux resize-pane -L 2"
+bind -n M-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq nvim && tmux send-keys M-j) || tmux resize-pane -D 2"
+bind -n M-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq nvim && tmux send-keys M-k) || tmux resize-pane -U 2"
+bind -n M-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq nvim && tmux send-keys M-l) || tmux resize-pane -R 2"
+
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
