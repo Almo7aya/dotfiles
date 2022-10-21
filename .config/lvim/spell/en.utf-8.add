@@ -54,3 +54,8 @@ configs
 SauceCodePro
 nvimtree
 blankline
+cmp
+tmux
+popup
+filetype
+mattern
