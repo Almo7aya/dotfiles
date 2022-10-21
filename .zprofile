@@ -11,7 +11,7 @@ export PATH="$PATH:$HOME/.bin"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
-export CC="/usr/bin/g++"
+export CC="gcc12"
 
 export ESLINT_D_LOCAL_ESLINT_ONLY=1
 
@@ -27,10 +27,4 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # MacPorts Installer addition on 2022-10-02_at_09:38:44: adding an appropriate MANPATH variable for use with MacPorts.
 export MANPATH="/opt/local/share/man:$MANPATH"
 # Finished adapting your MANPATH environment variable for use with MacPorts.
-
-
-
-
-# Added by Toolbox App
-export PATH="$PATH:/Users/almo7aya/Library/Application Support/JetBrains/Toolbox/scripts"
 

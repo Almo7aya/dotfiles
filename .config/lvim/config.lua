@@ -11,7 +11,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.fillchars = {
   vert = "│",
   fold = "░",
-  diff = " ", -- alternatives = ⣿ ░ ─ ╱
+  diff = " ",
   msgsep = "‾",
   foldopen = "▾",
   foldsep = "│",
@@ -25,10 +25,6 @@ vim.opt.guifont = { "SauceCodePro Nerd Font", "h12" }
 
 -- terminal configs
 lvim.builtin.terminal.active = false
-
--- dap configs
-lvim.builtin.dap.active = false
-
 
 -- nvimtree configs
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -57,22 +53,6 @@ lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.yadm.enable = true
 
 -- treesitter configs
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-}
-lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- indent_blankline configs
@@ -205,7 +185,7 @@ lvim.plugins = {
         hint_prefix = " ",
         hint_scheme = "String",
         hi_parameter = "Search", -- how your parameter will be highlight
-        max_height = 12, -- max height of signature floating_window, if content is more than max_height, you can scroll down
+        max_height = 12,
         max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
         transparency = 80,
         extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
@@ -385,13 +365,13 @@ lvim.plugins = {
           diff3 = {
             -- Mappings in 3-way diff layouts
             { { "n", "x" }, "2do", actions.diffget("ours") }, -- Obtain the diff hunk from the OURS version of the file
-            { { "n", "x" }, "3do", actions.diffget("theirs") }, -- Obtain the diff hunk from the THEIRS version of the file
+            { { "n", "x" }, "3do", actions.diffget("theirs") },
           },
           diff4 = {
             -- Mappings in 4-way diff layouts
             { { "n", "x" }, "1do", actions.diffget("base") }, -- Obtain the diff hunk from the BASE version of the file
             { { "n", "x" }, "2do", actions.diffget("ours") }, -- Obtain the diff hunk from the OURS version of the file
-            { { "n", "x" }, "3do", actions.diffget("theirs") }, -- Obtain the diff hunk from the THEIRS version of the file
+            { { "n", "x" }, "3do", actions.diffget("theirs") },
           },
           file_panel = {
             ["j"] = actions.next_entry, -- Bring the cursor to the next file entry
@@ -453,6 +433,53 @@ lvim.plugins = {
           },
         },
       })
+    end,
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      local rt = require("rust-tools")
+      local opts = {
+        tools = {
+          executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
+          reload_workspace_from_cargo_toml = true,
+          inlay_hints = {
+            auto = true,
+            only_current_line = true,
+            show_parameter_hints = true,
+            parameter_hints_prefix = "<-",
+            other_hints_prefix = "=>",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "Comment",
+          },
+          hover_actions = {
+            auto_focus = true,
+          },
+        },
+        server = {
+          on_attach = require("lvim.lsp").common_on_attach,
+          on_init = require("lvim.lsp").common_on_init,
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = {
+                command = "clippy",
+              },
+            },
+          },
+        },
+        dap = {
+          adapter = {
+            type = "executable",
+            command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
+            name = "rt_lldb",
+          },
+        },
+      }
+
+      rt.setup(opts)
     end,
   },
 }
@@ -544,32 +571,6 @@ actions.setup({
 
 -- set additional LSPs
 require("lvim.lsp.manager").setup("grammarly", nil)
-
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
-
-local clangd_flags = {
-  "--fallback-style=google",
-  "--background-index",
-  "-j=12",
-  "--all-scopes-completion",
-  "--pch-storage=disk",
-  "--clang-tidy",
-  "--log=error",
-  "--completion-style=detailed",
-  "--header-insertion=iwyu",
-  "--header-insertion-decorators",
-  "--enable-config",
-  "--offset-encoding=utf-16",
-  "--ranking-model=heuristics",
-  "--folding-ranges",
-}
-
-local clangd_bin = "clangd"
-
-local opts = {
-  cmd = { clangd_bin, unpack(clangd_flags) },
-}
-require("lvim.lsp.manager").setup("clangd", opts)
 
 -- set additional linters
 local linters = require("lvim.lsp.null-ls.linters")
