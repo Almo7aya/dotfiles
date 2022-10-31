@@ -20,6 +20,7 @@ miniplug plugin zsh-users/zsh-syntax-highlighting
 miniplug plugin jeffreytse/zsh-vi-mode
 miniplug plugin zsh-users/zsh-completions
 miniplug plugin zsh-users/zsh-autosuggestions
+# miniplug plugin marlonrichert/zsh-autocomplete
 miniplug plugin agkozak/zsh-z
 miniplug plugin wfxr/forgit
 miniplug plugin Bhupesh-V/ugit
@@ -67,11 +68,17 @@ alias :e="lvim"
 
 alias ports="lsof -i -P -n | grep LISTEN"
 
+alias get-ports="netstat -tulnp | grep LISTEN"
+alias get-router="ip route | grep default"
+alias get-ip="hostname -I"
+
 # taskell
 alias todo="taskell ~/Documents/taskell.md"
 
 # Kitty aliases
 alias d="kitty +kitten diff"
+
+alias pinentry='pinentry-mac'
 
 # # un - archive extractor
 # # usage: un <file>
@@ -99,7 +106,6 @@ un ()
 export GPG_TTY=$(tty)
 eval "$(mcfly init zsh)"
 
-SPACESHIP_BATTERY_SHOW="always"
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
   user          # Username section
@@ -144,3 +150,29 @@ function zvm_after_init() {
   zvm_bindkey viins '^R' mcfly-history-widget
 }
 
+# bun completions
+[ -s "/Users/almo7aya/.bun/_bun" ] && source "/Users/almo7aya/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+_tmux_pane_words() {
+  local expl
+  local -a w
+  if [[ -z "$TMUX_PANE" ]]; then
+    _message "not running inside tmux!"
+    return 1
+  fi
+  w=( ${(u)=$(tmux capture-pane \; show-buffer \; delete-buffer)} )
+  _wanted values expl 'words from current tmux pane' compadd -a w
+}
+
+zle -C tmux-pane-words-prefix   complete-word _generic
+zle -C tmux-pane-words-anywhere complete-word _generic
+bindkey '^Xt' tmux-pane-words-prefix
+bindkey '^X^X' tmux-pane-words-anywhere
+zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' completer _tmux_pane_words
+zstyle ':completion:tmux-pane-words-(prefix|anywhere):*' ignore-line current
+zstyle ':completion:tmux-pane-words-anywhere:*' matcher-list 'b:=* m:{A-Za-z}={a-zA-Z}'

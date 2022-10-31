@@ -97,5 +97,66 @@ M.change_syntax = function()
   end
 end
 
+
+M.btop_toggle = function()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local btop = Terminal:new {
+    cmd = "btop",
+    hidden = true,
+    direction = "float",
+    float_opts = {
+      border = "none",
+      width = 100000,
+      height = 100000,
+    },
+    on_open = function(_)
+      vim.cmd "startinsert!"
+    end,
+    on_close = function(_) end,
+    count = 99,
+  }
+  btop:toggle()
+end
+
+M.bacon_toggle = function()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local bacon = Terminal:new {
+    cmd = "bacon",
+    hidden = true,
+    direction = "float",
+    float_opts = {
+      border = "none",
+      width = 100000,
+      height = 100000,
+    },
+    on_open = function(_)
+      vim.cmd "startinsert!"
+    end,
+    on_close = function(_) end,
+    count = 99,
+  }
+  bacon:toggle()
+end
+
+M.gdu_toggle = function()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local gdu = Terminal:new {
+    cmd = "gdu",
+    hidden = true,
+    direction = "float",
+    float_opts = {
+      border = "none",
+      width = 100000,
+      height = 100000,
+    },
+    on_open = function(_)
+      vim.cmd "startinsert!"
+    end,
+    on_close = function(_) end,
+    count = 99,
+  }
+  gdu:toggle()
+end
+
 return M
 

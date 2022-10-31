@@ -11,7 +11,18 @@ export PATH="$PATH:$HOME/.bin"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
-export CC="gcc12"
+export PATH="$(brew --prefix)/opt/binutils/bin:$PATH"
+
+# export CC="gcc-12"
+# export cc="gcc-12"
+# export gcc12="gcc-12"
+# export gcc="gcc-12"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+
 
 export ESLINT_D_LOCAL_ESLINT_ONLY=1
 
