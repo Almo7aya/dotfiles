@@ -1,0 +1,9 @@
+{
+  "rust-analyzer.diagnostics.disabled": [
+    "inactive-code"
+  ],
+  "rust-analyzer.inlayHints.typeHints.enable": true,
+  "rust-analyzer.inlayHints.reborrowHints.enable": "always",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.cargo.buildScripts.enable": true
+}

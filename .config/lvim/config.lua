@@ -1,8 +1,8 @@
 local utils = require("utils")
+local status_line = require("statusline")
 
 -- general
 lvim.format_on_save = false
-lvim.log.level = "warn"
 lvim.colorscheme = "neogruvbox"
 vim.opt.cmdheight = 1
 vim.opt.relativenumber = true
@@ -25,7 +25,6 @@ vim.opt.guifont = { "SauceCodePro Nerd Font", "h12" }
 
 lvim.builtin.dap.active = false
 
-
 -- terminal configs
 -- lvim.builtin.terminal.active = false
 
@@ -34,7 +33,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 lvim.builtin.nvimtree.setup.actions.open_file.quit_on_open = true
 lvim.builtin.nvimtree.setup.hijack_cursor = true
-lvim.builtin.nvimtree.setup.update_cwd = true
+lvim.builtin.nvimtree.setup.update_cwd = false
 lvim.builtin.nvimtree.setup.reload_on_bufenter = true
 lvim.builtin.nvimtree.setup.filesystem_watchers = {
   enable = true,
@@ -88,7 +87,18 @@ lvim.builtin.indentlines.options.filetype_exclude = {
 }
 
 -- Lua line configs
+local components = require("lvim.core.lualine.components")
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
+lvim.builtin.lualine.sections.lualine_x = {
+  components.diagnostics,
+  {
+    status_line.lsp_progress,
+    separator = components.lsp.separator,
+  },
+  components.lsp,
+  components.spaces,
+  components.filetype,
+}
 
 -- which_key configs
 vim.opt.timeoutlen = 40
@@ -122,10 +132,9 @@ lvim.builtin.which_key.mappings["t"] = {
   i = { utils.set_indent, "Set indent" },
   n = { utils.change_number, "Toggle number" },
   x = { utils.change_syntax, "Toggle syntax" },
-  b = { utils.btop_toggle, "Toggle btop"},
-  c = { utils.bacon_toggle, "Toggle bacon"},
-  d = { utils.gdu_toggle, "Toggle gdu"}
-
+  b = { utils.btop_toggle, "Toggle btop" },
+  c = { utils.bacon_toggle, "Toggle bacon" },
+  d = { utils.gdu_toggle, "Toggle gdu" },
 }
 lvim.builtin.which_key.mappings["j"] = {
   name = "+Tweak",
@@ -180,28 +189,8 @@ lvim.plugins = {
   {
     "ray-x/lsp_signature.nvim",
     config = function()
-      require("lsp_signature").on_attach({
-        bind = true,
-        doc_lines = 10,
-        floating_window = false, -- show hint in a floating window, set to false for virtual text only mode
-        floating_window_above_cur_line = true,
-        fix_pos = false, -- set to true, the floating window will not auto-close until finish all parameters
-        hint_enable = true, -- virtual hint enable
-        hint_prefix = " ",
-        hint_scheme = "String",
-        hi_parameter = "Search", -- how your parameter will be highlight
-        max_height = 12,
-        max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
-        transparency = 80,
-        extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
-        zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-        debug = false, -- set to true to enable debug logging
-        padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
-        shadow_blend = 36, -- if you using shadow as border use this set the opacity
-        shadow_guibg = "Black", -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
-      })
+      require("lsp_signature-config").setup()
     end,
-    event = "BufRead",
   },
   {
     "itchyny/vim-cursorword",
@@ -259,53 +248,12 @@ lvim.plugins = {
       require("spectre").setup()
     end,
   },
-  -- {
-  --   "simrat39/rust-tools.nvim",
-  --   config = function()
-  --     local rt = require("rust-tools")
-  --     local opts = {
-  --       tools = {
-  --         executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
-  --         reload_workspace_from_cargo_toml = true,
-  --         inlay_hints = {
-  --           auto = true,
-  --           only_current_line = true,
-  --           show_parameter_hints = true,
-  --           parameter_hints_prefix = "<-",
-  --           other_hints_prefix = "=>",
-  --           max_len_align = false,
-  --           max_len_align_padding = 1,
-  --           right_align = false,
-  --           right_align_padding = 7,
-  --           highlight = "Comment",
-  --         },
-  --         hover_actions = {
-  --           auto_focus = true,
-  --         },
-  --       },
-  --       server = {
-  --         on_attach = require("lvim.lsp").common_on_attach,
-  --         on_init = require("lvim.lsp").common_on_init,
-  --         settings = {
-  --           ["rust-analyzer"] = {
-  --             checkOnSave = {
-  --               command = "clippy",
-  --             },
-  --           },
-  --         },
-  --       },
-  --       dap = {
-  --         adapter = {
-  --           type = "executable",
-  --           command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
-  --           name = "rt_lldb",
-  --         },
-  --       },
-  --     }
-
-  --     rt.setup(opts)
-  --   end,
-  -- },
+  {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      require("rust-tools-config").setup()
+    end,
+  },
   {
     "gorbit99/codewindow.nvim",
     config = function()
@@ -322,6 +270,7 @@ lvim.plugins = {
   },
   {
     "glepnir/lspsaga.nvim",
+    disable = true,
     config = function()
       local saga = require("lspsaga")
 
@@ -330,6 +279,7 @@ lvim.plugins = {
       })
     end,
   },
+  { "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
 }
 
 -- better mapping
