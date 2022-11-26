@@ -159,6 +159,11 @@ lvim.builtin.which_key.mappings["lP"] = {
   "Close all preview win",
 }
 
+lvim.builtin.which_key.mappings["la"] = {
+  "<cmd>CodeActionMenu <CR>",
+  "CodeActionMenu",
+}
+
 -- cmp configs
 lvim.builtin.cmp.experimental.ghost_text = true
 table.insert(lvim.builtin.cmp.sources, 1, {
@@ -173,6 +178,12 @@ table.insert(lvim.builtin.cmp.sources, 1, {
 
 -- lvim user custom plugins
 lvim.plugins = {
+  {
+    "glacambre/firenvim",
+    run = function()
+      vim.fn["firenvim#install"](0)
+    end,
+  },
   { "almo7aya/neogruvbox.nvim" },
   { "almo7aya/openingh.nvim" },
   { "andersevenrud/cmp-tmux" },
@@ -295,6 +306,8 @@ local function map(mode, keys, cmd)
   end
 end
 
+-- CodeActionMenu
+map("n", "l;", "<cmd>CodeActionMenu <CR>")
 -- S for nvim-spectre
 map("n", "S", "<cmd>lua require('spectre').open()<CR>")
 -- Disable nonsense recoding and map it to diffview
