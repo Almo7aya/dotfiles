@@ -9,9 +9,17 @@ export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS"
 
 export PATH="$PATH:$HOME/.bin"
 
+export PATH="$PATH:$HOME/Library/Android/sdk/tools"
+
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+
 export PATH="$(brew --prefix)/opt/binutils/bin:$PATH"
+
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# export HELIX_RUNTIME="$HOME/.local/share/helix"
 
 # export CC="gcc-12"
 # export cc="gcc-12"

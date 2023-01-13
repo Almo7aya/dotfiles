@@ -1,0 +1,51 @@
+theme = "gruvbox"
+
+[editor]
+line-number = "relative"
+color-modes = true
+auto-format = false
+cursorline = true
+cursorcolumn = false
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace]
+render = "all"
+
+[editor.indent-guides]
+render = true
+
+[editor.lsp]
+display-messages = false
+
+[editor.statusline]
+left = ["mode", "file-name", "spinner"]
+right = [
+  "diagnostics",
+  "workspace-diagnostics",
+  "primary-selection-length",
+  "position",
+  "position-percentage",
+  "file-encoding",
+  "file-type",
+]
+separator = " "
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+"'" = ["repeat_last_motion"]
+
+[keys.insert]
+esc = ["normal_mode", "collapse_selection", "keep_primary_selection"]
+
+[keys.select]
+o = ["flip_selections"]

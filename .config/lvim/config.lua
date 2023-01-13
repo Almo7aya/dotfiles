@@ -178,12 +178,6 @@ table.insert(lvim.builtin.cmp.sources, 1, {
 
 -- lvim user custom plugins
 lvim.plugins = {
-  {
-    "glacambre/firenvim",
-    run = function()
-      vim.fn["firenvim#install"](0)
-    end,
-  },
   { "almo7aya/neogruvbox.nvim" },
   { "almo7aya/openingh.nvim" },
   { "andersevenrud/cmp-tmux" },
@@ -279,17 +273,6 @@ lvim.plugins = {
       codewindow.apply_default_keybinds()
     end,
   },
-  {
-    "glepnir/lspsaga.nvim",
-    disable = true,
-    config = function()
-      local saga = require("lspsaga")
-
-      saga.init_lsp_saga({
-        -- your configuration
-      })
-    end,
-  },
   { "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" },
 }
 
@@ -364,21 +347,30 @@ lvim.keys.insert_mode["kj"] = false
 lvim.keys.insert_mode["jj"] = false
 
 -- set additional code-actions
--- local actions = require("lvim.lsp.null-ls.code_actions")
--- actions.setup({
---   {
---     command = "eslint_d",
---     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
---   },
---   {
---     command = "gitsigns",
---     filetypes = {},
---   },
---   {
---     command = "gitrebase",
---     filetypes = {},
---   },
--- })
+local actions = require("lvim.lsp.null-ls.code_actions")
+actions.setup({
+  {
+    command = "eslint_d",
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    condition = function(nullutils)
+      return nullutils.root_has_file({
+        ".eslintrc.cjs",
+        ".eslintrc.js",
+        ".eslintrc.yaml",
+        ".eslintrc.yml",
+        ".eslintrc.json",
+      })
+    end,
+  },
+  -- {
+  --   command = "gitsigns",
+  --   filetypes = {},
+  -- },
+  -- {
+  --   command = "gitrebase",
+  --   filetypes = {},
+  -- },
+})
 
 -- set additional LSPs
 require("lvim.lsp.manager").setup("grammarly", nil)
@@ -389,18 +381,27 @@ linters.setup({
   {
     command = "eslint_d",
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    condition = function(nullutils)
+      return nullutils.root_has_file({
+        ".eslintrc.cjs",
+        ".eslintrc.js",
+        ".eslintrc.yaml",
+        ".eslintrc.yml",
+        ".eslintrc.json",
+      })
+    end,
   },
-  {
-    command = "tsc",
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-  },
+  -- {
+  --   command = "tsc",
+  --   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  -- },
   {
     command = "luacheck",
     filetypes = { "lua" },
   },
   -- {
-  --   command = "stylelint",
-  --   filetypes = { "scss", "less", "css", "sass" },
+  -- command = "stylelint",
+  -- filetypes = { "scss", "less", "css", "sass" },
   -- },
   {
     command = "vint",
@@ -430,10 +431,26 @@ formatters.setup({
   {
     command = "prettierd",
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    condition = function(nullutils)
+      return nullutils.root_has_file({
+        ".prettierrc.yaml",
+        ".prettierrc.yml",
+        ".prettierrc.json",
+      }) -- and so on
+    end,
   },
   {
     command = "eslint_d",
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    condition = function(nullutils)
+      return nullutils.root_has_file({
+        ".eslintrc.cjs",
+        ".eslintrc.js",
+        ".eslintrc.yaml",
+        ".eslintrc.yml",
+        ".eslintrc.json",
+      })
+    end,
   },
   {
     command = "rustfmt",

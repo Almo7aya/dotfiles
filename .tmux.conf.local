@@ -238,8 +238,9 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
+tmux_conf_ip="$(ipconfig getifaddr en0)"
 tmux_conf_theme_status_left=" ❐ #S "
-tmux_conf_theme_status_right="#{synchronized}#{pairing}#{mouse}#{prefix}#{tmux_mode_indicator}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{online} | #{hostname} "
+tmux_conf_theme_status_right="#{synchronized}#{pairing}#{mouse}#{prefix}#{tmux_mode_indicator}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{online} | #{tmux_conf_ip} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
@@ -360,6 +361,7 @@ unbind C-a
 unbind C-b
 set -g prefix C-n
 bind C-n send-prefix
+bind C-a send-prefix
 
 # better navigation
 unbind C-h
