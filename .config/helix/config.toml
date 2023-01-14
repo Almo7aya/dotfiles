@@ -7,6 +7,7 @@ auto-format = false
 cursorline = true
 cursorcolumn = false
 bufferline = "multiple"
+true-color = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -42,7 +43,10 @@ mode.select = "SELECT"
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]
-"'" = ["repeat_last_motion"]
+"'" = "repeat_last_motion"
+K = ":buffer-next"
+J = ":buffer-previous"
+
 
 [keys.insert]
 esc = ["normal_mode", "collapse_selection", "keep_primary_selection"]
