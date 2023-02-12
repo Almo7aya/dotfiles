@@ -1,3 +1,7 @@
+emulate sh
+source ~/.profile
+emulate zsh
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/node@16/bin:/opt/homebrew/opt/openjdk/bin:/Users/almo7aya/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
 
@@ -18,6 +22,8 @@ export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 export PATH="$(brew --prefix)/opt/binutils/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 
 # export HELIX_RUNTIME="$HOME/.local/share/helix"
 
