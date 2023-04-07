@@ -1,4 +1,4 @@
-theme = "gruvbox"
+theme = "github_dark"
 
 [editor]
 line-number = "relative"

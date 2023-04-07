@@ -179,24 +179,24 @@ table.insert(lvim.builtin.cmp.sources, 1, {
 -- lvim user custom plugins
 lvim.plugins = {
   { "almo7aya/neogruvbox.nvim" },
-  { "almo7aya/openingh.nvim" },
-  { "andersevenrud/cmp-tmux" },
+  { "lvauthrin/openingh.nvim" },
+  -- { "andersevenrud/cmp-tmux" },
   { "christoomey/vim-tmux-navigator" },
-  {
-    "ntpeters/vim-better-whitespace",
-    config = function()
-      vim.cmd("highlight ExtraWhitespace ctermbg=8 guibg=#282c34")
-      vim.g.better_whitespace_enabled = 1
-      vim.g.strip_whitespace_on_save = 1
-      vim.g.strip_whitespace_confirm = 0
-    end,
-  },
-  {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("lsp_signature-config").setup()
-    end,
-  },
+  -- {
+  --   "ntpeters/vim-better-whitespace",
+  --   config = function()
+  --     vim.cmd("highlight ExtraWhitespace ctermbg=8 guibg=#282c34")
+  --     vim.g.better_whitespace_enabled = 1
+  --     vim.g.strip_whitespace_on_save = 1
+  --     vim.g.strip_whitespace_confirm = 0
+  --   end,
+  -- },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   config = function()
+  --     require("lsp_signature-config").setup()
+  --   end,
+  -- },
   {
     "itchyny/vim-cursorword",
     event = { "BufEnter", "BufNewFile" },
@@ -307,6 +307,7 @@ map("v", "U", ":<C-U>earlier <CR>")
 -- mapping openingh.nvim
 map("n", "<Leader>gm", ":OpenInGHRepo <CR>")
 map("n", "<Leader>gf", ":OpenInGHFile <CR>")
+map("v", "<Leader>gf", ":OpenInGHFile <CR>")
 -- mapping for ccc
 map("n", "<Leader>lc", ":CccPick <CR>")
 -- better cursor moves in visual mode

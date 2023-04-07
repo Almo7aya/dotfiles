@@ -1,6 +1,16 @@
 # window configuration
 window:
   startup_mode: Maximized
+  decorations: none
+
+shell:
+  program: /bin/zsh
+  args:
+    - --login
+    - --interactive
+    - -l
+    - -c
+    - "tmux attach || tmux"
 
 # Font configuration
 font:

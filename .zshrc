@@ -41,8 +41,8 @@ miniplug load
 # Global ENV
 # export TERM="xterm-kitty"
 #export TERM="xterm-256color"
-export EDITOR='lvim'
-export VISUAL='lvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # Custom aliases
 alias dash="gh dash"
@@ -54,8 +54,8 @@ alias ggn="git checkout -b "
 alias ggc="git checkout "
 alias ggp="gh pr create "
 alias gg="lazygit"
-alias n="lvim"
-alias e="lvim"
+alias n="nvim"
+alias e="nvim"
 alias ff="ranger"
 alias dl="lazydocker"
 alias t="tmux"
@@ -64,7 +64,7 @@ alias ta="tmux attach"
 
 # vim alias shit
 alias :q="exit"
-alias :e="lvim"
+alias :e="nvim"
 
 alias ports="lsof -i -P -n | grep LISTEN"
 
